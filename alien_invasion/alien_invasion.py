@@ -84,7 +84,16 @@ class AlienInvasion:
         """Создание флота вторжения"""
         # Создание пришельца
         alien = Alien(self)
-        self.aliens.add(alien)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_aliens_x = available_space_x
+
+        # Создание первого ряда пришельцев
+        for alien_number in range(number_aliens_x):
+            alien = Alien(self)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def _update_screen(self):
         # При каждом проходе цикла перерисовывается экран
