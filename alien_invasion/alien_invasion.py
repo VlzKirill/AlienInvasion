@@ -30,6 +30,10 @@ class AlienInvasion:
             self._update_screen()
             self.ship.update()
             self.bullets.update()
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+            print (len(self.bullets))
 
     def _check_events(self):
         # Отслеживание событий клавиатуры и мыши
