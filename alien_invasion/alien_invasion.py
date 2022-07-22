@@ -24,6 +24,8 @@ class AlienInvasion:
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
 
+        self._create_fleet()
+
     def run_game(self):
         '''Запуск основного цикла игры'''
         while True:
@@ -90,6 +92,8 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
+
         # Отображение последнего прорисованного экрана
         pygame.display.flip()
 
