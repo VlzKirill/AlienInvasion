@@ -9,3 +9,9 @@ class Settings():
         self.bg_color = (230, 230, 230)
 
         self.sheep_speed = 0.5
+
+        #Параметры снаряда (пули)
+        self.bullet_speed = 1
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (60, 60, 60)
