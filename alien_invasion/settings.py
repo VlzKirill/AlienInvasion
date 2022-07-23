@@ -8,7 +8,7 @@ class Settings:
         self.screen_height = 600
         self.bg_color = (230, 230, 230)
         self.alien_speed = 0.1
-        self.fleet_drop_speed = 1
+        self.fleet_drop_speed = 10
         #fleet_direction 1: движение вправо, -1: движение влево
         self.fleet_direction = 1
         self.sheep_speed = 0.5
