@@ -34,11 +34,12 @@ class AlienInvasion:
         '''Запуск основного цикла игры'''
         while True:
             self._check_events()
-            self._update_aliens()
+            if self.stats.game_active:
+                self._update_aliens()
+                self.ship.update()
+                self._update_bullets()
+                self.bullets.update()
             self._update_screen()
-            self.ship.update()
-            self._update_bullets()
-            self.bullets.update()
 
     def _check_events(self):
         # Отслеживание событий клавиатуры и мыши
@@ -145,10 +146,16 @@ class AlienInvasion:
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
 
+        # Проверка, добрались ли пришельцы до нижнего края экрана
+        self._check_aliens_bottom()
+
     def _ship_hit(self):
         """ Обрабатывает столкновение еорабля с пришельцем"""
-        #Уменьшение ships_left
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            # Уменьшение ships_left
+            self.stats.ships_left -= 1
+        else:
+            self.stats.game_active = False
 
         # Очистка списка пришельцеви снарядов
         self.bullets.empty()
@@ -160,6 +167,15 @@ class AlienInvasion:
 
         # Пауза
         sleep(0.5)
+
+    def _check_aliens_bottom(self):
+        """ Проверяет, добрались ли пришельцы до нижнего края экана"""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                # Происходит то же, что при столкновении с кораблем
+                self._ship_hit()
+                break
 
     def _update_screen(self):
         # При каждом проходе цикла перерисовывается экран
