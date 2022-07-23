@@ -93,6 +93,9 @@ class AlienInvasion:
             self._create_fleet()
             self.ship.center_ship()
 
+            # Скрыть указатель мыши
+            pygame.mouse.set_visible(False)
+
     def _fire_bullet(self):
         """Создание нового снаряда и включение его в группу bullets"""
         if len(self.bullets) < self.settings.bullets_allowed:
@@ -177,6 +180,7 @@ class AlienInvasion:
             self.stats.ships_left -= 1
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
         # Очистка списка пришельцеви снарядов
         self.bullets.empty()
