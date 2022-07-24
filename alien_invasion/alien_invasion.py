@@ -84,6 +84,7 @@ class AlienInvasion:
         self.stats.game_active = True
         self.clear_space()
         self.sb.prep_score()
+        self.sb.prep_level()
 
     def _check_keyup_events(self, event):
         # реагирует на отпускание клавиш
@@ -130,6 +131,10 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            # Увеличение уровня
+            self.stats.level +=1
+            self.sb.prep_level()
 
     def _create_fleet(self):
         """Создание флота вторжения"""
