@@ -85,6 +85,7 @@ class AlienInvasion:
         self.clear_space()
         self.sb.prep_score()
         self.sb.prep_level()
+        self.sb.prep_ships()
 
     def _check_keyup_events(self, event):
         # реагирует на отпускание клавиш
@@ -201,6 +202,7 @@ class AlienInvasion:
         if self.stats.ships_left > 0:
             # Уменьшение ships_left
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
         else:
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
