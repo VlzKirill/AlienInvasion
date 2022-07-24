@@ -49,6 +49,7 @@ class AlienInvasion:
         # Отслеживание событий клавиатуры и мыши
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self._save_high_score()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
@@ -72,6 +73,8 @@ class AlienInvasion:
             self._fire_bullet()
         elif event.key == pygame.K_RETURN and not self.stats.game_active:
             self.start_game()
+        elif event.key == pygame.K_t:
+            self.settings.bullet_width = 3000
         elif event.key == pygame.K_p:
             if self.stats.game_active == False:
                 self.stats.game_active = True
@@ -235,6 +238,11 @@ class AlienInvasion:
 
         # Отображение последнего прорисованного экрана
         pygame.display.flip()
+
+    def _save_high_score(self):
+        highscore_filename = 'high_score.txt'
+        with open(highscore_filename, 'w') as highscore_file:
+            highscore_file.write(str(self.stats.high_score))
 
 if __name__ == '__main__':
     # Создание экземпляра и запуск игры
